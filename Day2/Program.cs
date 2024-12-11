@@ -1,4 +1,8 @@
-﻿var filePath = Path.Combine(Directory.GetCurrentDirectory(), "inputDay2.txt");
+﻿using System.Diagnostics;
+
+var watcher = new Stopwatch();
+watcher.Start();
+var filePath = Path.Combine(Directory.GetCurrentDirectory(), "inputDay2.txt");
 
 var reports = File.ReadLines(filePath)
         .Select(line => line.Split(' ', StringSplitOptions.RemoveEmptyEntries)
@@ -7,6 +11,8 @@ var reports = File.ReadLines(filePath)
 var safeReports = reports.Count(report => IsReportSafe(report));
 
 Console.WriteLine($"Safe Reports: {safeReports}");
+watcher.Stop();
+Console.WriteLine($"Execution Time: {watcher.ElapsedMilliseconds} ms");
 
 Console.ReadKey();
 return;

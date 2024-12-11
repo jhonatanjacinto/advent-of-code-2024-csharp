@@ -1,4 +1,9 @@
-﻿var filePath = Path.Combine(Directory.GetCurrentDirectory(), "inputDay1.txt");
+﻿using System.Diagnostics;
+
+var watcher = new Stopwatch();
+watcher.Start();
+
+var filePath = Path.Combine(Directory.GetCurrentDirectory(), "inputDay1.txt");
 var leftNumbers = new List<int>();
 var rightNumbers = new List<int>();
 
@@ -36,5 +41,7 @@ var totalSimilarityScore = similarityScoreList.Sum();
 
 Console.WriteLine($"Total Distance: {totalDistance}");
 Console.WriteLine($"Similarity Score: {totalSimilarityScore}");
+watcher.Stop();
+Console.WriteLine($"Execution Time: {watcher.ElapsedMilliseconds} ms");
 
 Console.ReadKey();
