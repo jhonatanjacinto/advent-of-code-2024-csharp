@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-var filePath = Path.Combine(Directory.GetCurrentDirectory(), "inputDay1.txt");
+﻿var filePath = Path.Combine(Directory.GetCurrentDirectory(), "inputDay1.txt");
 var leftNumbers = new List<int>();
 var rightNumbers = new List<int>();
 
@@ -15,21 +13,28 @@ leftNumbers.Sort();
 rightNumbers.Sort();
 
 var distanceBetweenNumbers = new List<int>();
+var similarityScoreList = new List<int>();
 
 for (var i = 0; i < leftNumbers.Count; i++)
 {
-    var distance = rightNumbers[i] - leftNumbers[i];
+    var leftNumber = leftNumbers[i];
+    var rightNumber = rightNumbers[i];
+    var distance = rightNumber - leftNumber;
     
-    if (leftNumbers[i] > rightNumbers[i])
+    if (leftNumber > rightNumber)
     {
-        distance = leftNumbers[i] - rightNumbers[i];
+        distance = leftNumber - rightNumber;
     }
     
     distanceBetweenNumbers.Add(distance);
+    var repeatitions = rightNumbers.Count(n => n == leftNumber);
+    similarityScoreList.Add(leftNumber * repeatitions);
 }
 
 var totalDistance = distanceBetweenNumbers.Sum();
+var totalSimilarityScore = similarityScoreList.Sum();
 
 Console.WriteLine($"Total Distance: {totalDistance}");
+Console.WriteLine($"Similarity Score: {totalSimilarityScore}");
 
 Console.ReadKey();
