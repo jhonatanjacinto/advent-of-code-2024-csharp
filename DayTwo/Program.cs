@@ -23,13 +23,8 @@ static bool IsReportSafe(int[] report, bool shouldCheckFurther = true)
         if (currentDirection != lastDirection || Math.Abs(differFactor) > 3 || differFactor == 0)
         {
             if (!shouldCheckFurther) return false;
-
-            var report0 = report.Where((n, index) => index != 0).ToArray();
-            var report1 = report.Where((n, index) => index != i).ToArray();
-            var report2 = report.Where((n, index) => index != i + 1).ToArray();
-            var isSafe = IsReportSafe(report0, false) || IsReportSafe(report1, false) || IsReportSafe(report2, false);
-            
-            return isSafe;
+            if (i == 1 && IsReportSafe(report.Where((_, index) => index != 0).ToArray(), false)) return true;
+            return IsReportSafe(report.Where((_, index) => index != i).ToArray(), false) || IsReportSafe(report.Where((n, index) => index != i + 1).ToArray(), false);
         }
     }
     
